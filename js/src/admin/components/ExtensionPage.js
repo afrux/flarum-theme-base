@@ -12,7 +12,7 @@ export default class ExtensionPage extends FlarumExtensionPage {
   header() {
     const topItems = this.topItems();
 
-    topItems.get('version').attrs.className += ' UiKit-Label';
+    topItems.get('version').attrs.className += ' TagLabel';
 
     return (
       <div className="ExtensionPage-header ThemeBase-AdminHeader">
