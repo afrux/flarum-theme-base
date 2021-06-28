@@ -64,7 +64,7 @@ export default class ExtensionPage extends FlarumExtensionPage {
 
                 return (
                   <Button
-                    className="Button ExtensionPage-sections-nav-item ThemeBase-ExtensionPage-sections-nav-item"
+                    className={["Button ExtensionPage-sections-nav-item ThemeBase-ExtensionPage-sections-nav-item", this.activeSection === section ? 'Button--active' : '']}
                     onclick={() => this.activeSection = section}>
                     {app.translator.trans(sectionNameKey) === sectionNameKey ? section : app.translator.trans(sectionNameKey)}
                   </Button>
