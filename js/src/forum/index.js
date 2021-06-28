@@ -1,12 +1,11 @@
 import { extend } from 'flarum/common/extend';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 import ForumApplication from 'flarum/forum/ForumApplication';
 import WelcomeHero from 'flarum/forum/components/WelcomeHero';
 
 app.initializers.add('afrux-theme-base', () => {
   extend(ForumApplication.prototype, 'mount', () => {
-    if (app.forum.attribute('afrux-theme-base.footerHooked'))
-      m.mount(document.getElementById('footer'), Footer);
+    if (app.forum.attribute('afrux-theme-base.footerHooked')) m.mount(document.getElementById('footer'), Footer);
   });
 
   extend(WelcomeHero.prototype, 'view', function (vnode) {

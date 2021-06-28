@@ -1,6 +1,6 @@
 {
   "name": "afrux/flarum-theme-base",
-  "description": "Base package for shared code between themes",
+  "description": "Base package for shared code between Afrux themes",
   "keywords": [
     "flarum", "themes", "base"
   ],
@@ -22,8 +22,8 @@
     }
   },
   "extra": {
-      "branch-alias": {
-          "dev-master": "0.1.x-dev"
-      }
+    "branch-alias": {
+      "dev-master": "0.1.x-dev"
+    }
   }
 }

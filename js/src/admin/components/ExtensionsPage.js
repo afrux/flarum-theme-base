@@ -1,9 +1,9 @@
-import AdminPage from "flarum/admin/components/AdminPage";
-import getCategorizedExtensions from "flarum/admin/utils/getCategorizedExtensions";
-import ExtensionsWidget from "flarum/admin/components/ExtensionsWidget";
-import icon from "flarum/common/helpers/icon";
-import isExtensionEnabled from "flarum/admin/utils/isExtensionEnabled";
-import Link from "flarum/common/components/Link";
+import AdminPage from 'flarum/admin/components/AdminPage';
+import getCategorizedExtensions from 'flarum/admin/utils/getCategorizedExtensions';
+import ExtensionsWidget from 'flarum/admin/components/ExtensionsWidget';
+import icon from 'flarum/common/helpers/icon';
+import isExtensionEnabled from 'flarum/admin/utils/isExtensionEnabled';
+import Link from 'flarum/common/components/Link';
 
 export default class ExtensionsPage extends AdminPage {
   oninit(vnode) {
@@ -17,7 +17,7 @@ export default class ExtensionsPage extends AdminPage {
       className: 'ThemeBase-ExtensionsPage',
       icon: 'fas fa-puzzle-piece',
       title: app.translator.trans('afrux-theme-base.admin.extensions'),
-      description: 'List of all installed extensions.'
+      description: 'List of all installed extensions.',
     };
   }
 
@@ -25,24 +25,26 @@ export default class ExtensionsPage extends AdminPage {
     return (
       <div className="ThemeBase-ExtensionCategories">
         <div className="ThemeBase-ExtensionCategories-container">
-          {Object.keys(this.extensions).map(category => (
+          {Object.keys(this.extensions).map((category) => (
             <div className="ThemeBase-ExtensionCategory">
-              <h3 className="ThemeBase-ExtensionCategory-title">{(app.categoryLabels && app.categoryLabels[category]) || app.translator.trans(`core.admin.nav.categories.${category}`)}</h3>
+              <h3 className="ThemeBase-ExtensionCategory-title">
+                {(app.categoryLabels && app.categoryLabels[category]) || app.translator.trans(`core.admin.nav.categories.${category}`)}
+              </h3>
               <div className="ThemeBase-ExtensionCategory-container">
-                {this.extensions[category].map(extension => (
+                {this.extensions[category].map((extension) => (
                   <Link href={app.route('extension', { id: extension.id })} className="ThemeBase-Extension">
                     <div className="ThemeBase-Extension-icon">
-                    <span className="ExtensionListItem-icon ExtensionIcon" style={extension.icon}>
-                      {extension.icon ? icon(extension.icon.name) : ''}
-                    </span>
+                      <span className="ExtensionListItem-icon ExtensionIcon" style={extension.icon}>
+                        {extension.icon ? icon(extension.icon.name) : ''}
+                      </span>
                     </div>
                     <div className="ThemeBase-Extension-content">
                       <div className="ThemeBase-Extension-title">
                         <div
                           className={[
-                            "ExtensionListItem-Dot",
-                            "ThemeBase-Extension-state",
-                            (isExtensionEnabled(extension.id) ? 'enabled' : 'disabled')
+                            'ExtensionListItem-Dot',
+                            'ThemeBase-Extension-state',
+                            isExtensionEnabled(extension.id) ? 'enabled' : 'disabled',
                           ].join(' ')}
                         ></div>
                         <div className="ThemeBase-Extension-title-value">{extension.extra['flarum-extension'].title}</div>

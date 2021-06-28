@@ -1,5 +1,5 @@
 import { extend, override } from 'flarum/extend';
-import EditFooterLinksModal from "./components/EditFooterLinksModal";
+import EditFooterLinksModal from './components/EditFooterLinksModal';
 import StatusWidget from 'flarum/admin/components/StatusWidget';
 import ExtensionsWidget from 'flarum/admin/components/ExtensionsWidget';
 import HeaderSecondary from 'flarum/admin/components/HeaderSecondary';
@@ -40,12 +40,7 @@ app.initializers.add('afrux-theme-base', () => {
         return (
           <div className="Form-group HeroImageForm">
             <label for="afrux-theme-base.hero_banner">{app.translator.trans('afrux-theme-base.admin.settings.hero_banner')}</label>
-            <UploadImageButton
-              setting="afrux-theme-base.hero_banner"
-              serializedName="afruxHeroBanner"
-              routeName="afrux_banner"
-              name="afrux_banner"
-            />
+            <UploadImageButton setting="afrux-theme-base.hero_banner" serializedName="afruxHeroBanner" routeName="afrux_banner" name="afrux_banner" />
           </div>
         );
       })
@@ -63,14 +58,18 @@ app.initializers.add('afrux-theme-base', () => {
         return (
           <div className="Form-group">
             <label>{app.translator.trans('afrux-theme-base.admin.settings.footer_description')}</label>
-            <textarea className="FormControl" bidi={this.setting('afrux-theme-base.footer_description')}>{this.setting('afrux-theme-base.footer_description')()}</textarea>
+            <textarea className="FormControl" bidi={this.setting('afrux-theme-base.footer_description')}>
+              {this.setting('afrux-theme-base.footer_description')()}
+            </textarea>
           </div>
         );
       })
       .registerSetting(() => (
         <div className="Form-group">
           <label>{app.translator.trans('afrux-theme-base.admin.settings.edit_footer_links')}</label>
-          <Button className="Button" onclick={() => app.modal.show(EditFooterLinksModal)}>{app.translator.trans('afrux-theme-base.admin.settings.edit_footer_links')}</Button>
+          <Button className="Button" onclick={() => app.modal.show(EditFooterLinksModal)}>
+            {app.translator.trans('afrux-theme-base.admin.settings.edit_footer_links')}
+          </Button>
         </div>
       ))
       .registerSetting({
@@ -98,12 +97,12 @@ app.initializers.add('afrux-theme-base', () => {
         items.add('version-laravel', [<strong>Laravel</strong>, <br />, app.data.illuminateVersion.replace('v', '')]);
       }
 
-      Object.keys(items.items).map(key => {
+      Object.keys(items.items).map((key) => {
         const item = items.get(key);
 
         item[0].tag = 'div';
         item[0].attrs.className = 'ThemeBase-StatusWidget-key';
-        item[2] = <div className="ThemeBase-StatusWidget-value">{item[2]}</div>
+        item[2] = <div className="ThemeBase-StatusWidget-value">{item[2]}</div>;
 
         item[1] = <div className="ThemeBase-StatusWidget-content">{[item[0], item[2]]}</div>;
         item[0] = <div className="ThemeBase-StatusWidget-icon">{icon(icons[key])}</div>;
@@ -116,7 +115,7 @@ app.initializers.add('afrux-theme-base', () => {
   }
 
   if (normalizeAdminHeaderStructure) {
-    override(AdminHeader.prototype, 'view', function(original, vnode) {
+    override(AdminHeader.prototype, 'view', function (original, vnode) {
       switch (this.attrs.className) {
         case 'DashboardPage-header':
           this.handleClearCache = StatusWidget.prototype.handleClearCache;
@@ -151,9 +150,7 @@ app.initializers.add('afrux-theme-base', () => {
               <h2 className="ThemeBase-AdminHeader-title">{vnode.children}</h2>
               <div className="ThemeBase-AdminHeader-description">{this.attrs.description}</div>
             </div>
-            <div className="ThemeBase-AdminHeader-controls">
-              {this.controls && this.controls()}
-            </div>
+            <div className="ThemeBase-AdminHeader-controls">{this.controls && this.controls()}</div>
           </div>
         </div>
       );
@@ -192,12 +189,7 @@ app.initializers.add('afrux-theme-base', () => {
               return username_;
             }
 
-            return [
-              username_,
-              ' (',
-              displayName,
-              ')'
-            ];
+            return [username_, ' (', displayName, ')'];
           },
         },
         90
@@ -209,16 +201,14 @@ app.initializers.add('afrux-theme-base', () => {
       const emailAddress = columns.get('emailAddress');
       emailAddress.name = [icon('far fa-envelope'), ' ', emailAddress.name];
 
-      columns.add(
-        'profileLink',
-        {
-          name: '',//app.translator.trans('afrux-theme-base.admin.users.grid.columns.profile_link.title'),
-          content: (user) =>
-            <a className="Button Button--icon UserList-profileLinkBtn" href={`${app.forum.attribute('baseUrl')}/u/${user.slug()}`}>
-              {icon('fas fa-link')}
-            </a>,
-        }
-      );
+      columns.add('profileLink', {
+        name: '', //app.translator.trans('afrux-theme-base.admin.users.grid.columns.profile_link.title'),
+        content: (user) => (
+          <a className="Button Button--icon UserList-profileLinkBtn" href={`${app.forum.attribute('baseUrl')}/u/${user.slug()}`}>
+            {icon('fas fa-link')}
+          </a>
+        ),
+      });
     });
 
     extend(UserListPage.prototype, 'onupdate', function (vnode) {
@@ -255,10 +245,7 @@ app.initializers.add('afrux-theme-base', () => {
           active={['extension', 'extensions'].includes(app.current.data.routeName)}
         >
           <span>{app.translator.trans('afrux-theme-base.admin.extensions')}</span>
-          {app.current.data.extension
-            ? <span className="ThemeBase-extensions-nav-current">{app.current.data.extension}</span>
-            : []
-          }
+          {app.current.data.extension ? <span className="ThemeBase-extensions-nav-current">{app.current.data.extension}</span> : []}
         </LinkButton>
       );
 

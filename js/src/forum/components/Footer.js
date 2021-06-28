@@ -12,7 +12,7 @@ export default class Footer extends Component {
         {this.separator()}
         <div className="ThemeBaseFooter-container container">
           {this.upper()}
-          {app.forum.attribute('afrux-theme-base.footerBottomLine') && this.lower() || ''}
+          {(app.forum.attribute('afrux-theme-base.footerBottomLine') && this.lower()) || ''}
         </div>
       </div>
     );
@@ -25,21 +25,23 @@ export default class Footer extends Component {
   upper() {
     return (
       <div className="ThemeBaseFooter-upper">
-        <div className={["ThemeBaseFooter-about", this.hasLinks() ? '' : 'ThemeBaseFooter-about--large'].join(' ')}>
-          <div className={["ThemeBaseFooter-logo", this.hasDescription() ? '' : 'ThemeBaseFooter-logo--large'].join(' ')}>
+        <div className={['ThemeBaseFooter-about', this.hasLinks() ? '' : 'ThemeBaseFooter-about--large'].join(' ')}>
+          <div className={['ThemeBaseFooter-logo', this.hasDescription() ? '' : 'ThemeBaseFooter-logo--large'].join(' ')}>
             <img src={app.forum.attribute('logoUrl')} alt="logo" />
           </div>
           {this.hasDescription() ? (
             <p className="ThemeBaseFooter-logo-description">{app.forum.attribute('afrux-theme-base.footerDescription')}</p>
-          ) : ''}
+          ) : (
+            ''
+          )}
         </div>
         {this.hasLinks() ? (
           <div className="ThemeBaseFooter-links">
-            {app.forum.attribute('afrux-theme-base.footerLinks').map(group => (
+            {app.forum.attribute('afrux-theme-base.footerLinks').map((group) => (
               <div className="ThemeBaseFooter-linkGroup">
                 <h6 className="ThemeBaseFooter-linkGroup-title">{group.title}</h6>
                 <ul>
-                  {group.links.map(link => (
+                  {group.links.map((link) => (
                     <li className="ThemeBaseFooter-links-item">
                       <Link to={link.url}>{link.label}</Link>
                     </li>
@@ -48,7 +50,9 @@ export default class Footer extends Component {
               </div>
             ))}
           </div>
-        ) : ''}
+        ) : (
+          ''
+        )}
       </div>
     );
   }
