@@ -58,6 +58,7 @@ class DashboardLayout implements Extend\ExtenderInterface
     {
         if (in_array('splitToNavAndContent', $this->actions, true)) {
             (new Extend\Frontend('admin'))
+                ->css(__DIR__.'/../../less/admin/extenders/SplitLayout.less')
                 ->content(function (Document $document) {
                     $document->layoutView = "afrux-theme-base::frontend.admin";
                 })
