@@ -133,13 +133,15 @@ app.initializers.add('afrux-theme-base', () => {
           break;
 
         case 'ThemeBase-ExtensionsPage-header':
-          this.controls = () => {
-            const buttonGroup = ExtensionsWidget.prototype.controlItems().toArray()[0].children;
+          if (addExtensionsPage && ExtensionsWidget.prototype.controlItems) {
+            this.controls = () => {
+              const buttonGroup = ExtensionsWidget.prototype.controlItems().toArray()[0].children;
 
-            buttonGroup[0].attrs.menuClassName += ' Dropdown-menu--right';
+              buttonGroup[0].attrs.menuClassName += ' Dropdown-menu--right';
 
-            return buttonGroup;
-          };
+              return buttonGroup;
+            };
+          }
       }
 
       return (
