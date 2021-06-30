@@ -9,6 +9,7 @@ export default class EditFooterLinksModal extends Modal {
     super.oninit(vnode);
 
     this.links = Stream((app.data.settings['afrux-theme-base.footer_links'] && JSON.parse(app.data.settings['afrux-theme-base.footer_links'])) || []);
+    this.loading = Stream(false);
   }
 
   title() {
@@ -61,16 +62,22 @@ export default class EditFooterLinksModal extends Modal {
         <div>
           <Button
             className="Button Button--primary"
+            loading={this.loading()}
             onclick={() => {
               saveSettings({
-                'afrux-theme-base.footerLinks': JSON.stringify(this.links()),
+                'afrux-theme-base.footer_links': JSON.stringify(this.links()),
+              }).then(() => {
+                this.loading(false);
+                app.modal.close();
               });
+
+              this.loading(true);
             }}
           >
             {app.translator.trans('core.lib.edit_user.submit_button')}
           </Button>
           <Button
-            className="Button Button--primary"
+            className="Button"
             icon="fas fa-plus-circle"
             onclick={() => {
               this.saveGroup({

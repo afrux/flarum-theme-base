@@ -43,7 +43,7 @@ export default class Footer extends Component {
                 <ul>
                   {group.links.map((link) => (
                     <li className="ThemeBaseFooter-links-item">
-                      <Link to={link.url}>{link.label}</Link>
+                      <a href={link.url} rel="noopener">{link.label}</a>
                     </li>
                   ))}
                 </ul>
