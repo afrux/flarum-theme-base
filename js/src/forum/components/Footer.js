@@ -27,7 +27,11 @@ export default class Footer extends Component {
       <div className="ThemeBaseFooter-upper">
         <div className={['ThemeBaseFooter-about', this.hasLinks() ? '' : 'ThemeBaseFooter-about--large'].join(' ')}>
           <div className={['ThemeBaseFooter-logo', this.hasDescription() ? '' : 'ThemeBaseFooter-logo--large'].join(' ')}>
-            <img src={app.forum.attribute('logoUrl')} alt="logo" />
+            {app.forum.attribute('logoUrl') ? (
+              <img src={app.forum.attribute('logoUrl')} alt="logo" />
+            ) : (
+              <h1 className="ThemeBaseFooter-title">{app.forum.attribute('title')}</h1>
+            )}
           </div>
           {this.hasDescription() ? (
             <p className="ThemeBaseFooter-logo-description">{app.forum.attribute('afrux-theme-base.footerDescription')}</p>
