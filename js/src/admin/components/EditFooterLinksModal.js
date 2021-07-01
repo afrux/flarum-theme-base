@@ -8,7 +8,15 @@ export default class EditFooterLinksModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.links = Stream((app.data.settings['afrux-theme-base.footer_links'] && JSON.parse(app.data.settings['afrux-theme-base.footer_links'])) || []);
+    const footerLinks = app.data.settings['afrux-theme-base.footer_links'];
+    const links = ((footerLinks && JSON.parse(footerLinks)) || []).filter((item) => item !== null).map((item) => {
+      if (item.links)
+        item.links = item.links.filter((item) => item !== null);
+
+      return item;
+    });
+
+    this.links = Stream(links);
     this.loading = Stream(false);
   }
 
@@ -136,6 +144,8 @@ export default class EditFooterLinksModal extends Modal {
     else if (index !== null) links[groupIndex].links[index] = link;
     else links[groupIndex].links.push(link);
 
+    links[groupIndex].links = links[groupIndex].links.filter((item) => item !== null);
+
     this.links(links);
   }
 
@@ -145,6 +155,8 @@ export default class EditFooterLinksModal extends Modal {
     if (del) delete links[groupIndex];
     else if (groupIndex !== null) links[groupIndex] = group;
     else links.push(group);
+
+    links = links.filter((item) => item !== null);
 
     this.links(links);
   }

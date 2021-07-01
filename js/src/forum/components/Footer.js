@@ -23,6 +23,13 @@ export default class Footer extends Component {
   }
 
   upper() {
+    const links = (app.forum.attribute('afrux-theme-base.footerLinks') || []).filter((item) => item !== null).map((item) => {
+      if (item.links)
+        item.links = item.links.filter((item) => item !== null);
+
+      return item;
+    });
+
     return (
       <div className="ThemeBaseFooter-upper">
         <div className={['ThemeBaseFooter-about', this.hasLinks() ? '' : 'ThemeBaseFooter-about--large'].join(' ')}>
@@ -41,7 +48,7 @@ export default class Footer extends Component {
         </div>
         {this.hasLinks() ? (
           <div className="ThemeBaseFooter-links">
-            {app.forum.attribute('afrux-theme-base.footerLinks').map((group) => (
+            {links.map((group) => (
               <div className="ThemeBaseFooter-linkGroup">
                 <h6 className="ThemeBaseFooter-linkGroup-title">{group.title}</h6>
                 <ul>
