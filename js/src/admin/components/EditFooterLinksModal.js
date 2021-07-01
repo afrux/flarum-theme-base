@@ -9,12 +9,13 @@ export default class EditFooterLinksModal extends Modal {
     super.oninit(vnode);
 
     const footerLinks = app.data.settings['afrux-theme-base.footer_links'];
-    const links = ((footerLinks && JSON.parse(footerLinks)) || []).filter((item) => item !== null).map((item) => {
-      if (item.links)
-        item.links = item.links.filter((item) => item !== null);
+    const links = ((footerLinks && JSON.parse(footerLinks)) || [])
+      .filter((item) => item !== null)
+      .map((item) => {
+        if (item.links) item.links = item.links.filter((item) => item !== null);
 
-      return item;
-    });
+        return item;
+      });
 
     this.links = Stream(links);
     this.loading = Stream(false);

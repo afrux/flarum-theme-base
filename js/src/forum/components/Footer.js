@@ -23,12 +23,13 @@ export default class Footer extends Component {
   }
 
   upper() {
-    const links = (app.forum.attribute('afrux-theme-base.footerLinks') || []).filter((item) => item !== null).map((item) => {
-      if (item.links)
-        item.links = item.links.filter((item) => item !== null);
+    const links = (app.forum.attribute('afrux-theme-base.footerLinks') || [])
+      .filter((item) => item !== null)
+      .map((item) => {
+        if (item.links) item.links = item.links.filter((item) => item !== null);
 
-      return item;
-    });
+        return item;
+      });
 
     return (
       <div className="ThemeBaseFooter-upper">
