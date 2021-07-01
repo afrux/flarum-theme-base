@@ -283,3 +283,9 @@ app.initializers.add('afrux-theme-base', () => {
     items.get('help').attrs.className = 'Button Button--link';
   });
 });
+
+// Expose compat API
+import customCompat from './compat';
+import { compat } from '@flarum/core/admin';
+
+Object.assign(compat, customCompat);

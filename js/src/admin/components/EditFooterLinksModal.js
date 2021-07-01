@@ -30,7 +30,7 @@ export default class EditFooterLinksModal extends Modal {
                 className="EditFooterLinksModal-groups-item-title-text"
                 contenteditable="true"
                 oninput={(e) => {
-                  this.saveGroup({ ...group, title: e.target.value }, groupIndex);
+                  this.saveGroup({ ...group, title: e.target.innerHTML }, groupIndex);
                 }}
               >
                 {m.trust(group.title)}
