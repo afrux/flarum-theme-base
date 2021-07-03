@@ -151,7 +151,7 @@ export default class EditFooterLinksModal extends Modal {
   }
 
   saveGroup(group, groupIndex = null, del = false) {
-    const links = [...this.links()];
+    let links = [...this.links()];
 
     if (del) delete links[groupIndex];
     else if (groupIndex !== null) links[groupIndex] = group;
