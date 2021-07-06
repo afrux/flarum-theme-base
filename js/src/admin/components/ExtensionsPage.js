@@ -16,8 +16,8 @@ export default class ExtensionsPage extends AdminPage {
     return {
       className: 'ThemeBase-ExtensionsPage',
       icon: 'fas fa-puzzle-piece',
-      title: app.translator.trans('afrux-theme-base.admin.extensions'),
-      description: 'List of all installed extensions.',
+      title: app.translator.trans('afrux-theme-base.admin.extensions.title'),
+      description: app.translator.trans('afrux-theme-base.admin.extensions.desc'),
     };
   }
 
