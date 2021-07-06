@@ -1,6 +1,8 @@
 afrux-theme-base:
   admin:
-    extensions: Extensions
+    extensions:
+      title: Extensions
+      desc: List of all installed extensions.
     extension:
       sections:
         content: Main Settings
