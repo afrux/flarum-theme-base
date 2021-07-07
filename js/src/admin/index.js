@@ -243,10 +243,10 @@ app.initializers.add('afrux-theme-base', () => {
         <LinkButton
           href={app.route('extensions')}
           icon="fas fa-puzzle-piece"
-          title={app.translator.trans('afrux-theme-base.admin.extensions')}
+          title={app.translator.trans('afrux-theme-base.admin.extensions.title')}
           active={['extension', 'extensions'].includes(app.current.data.routeName)}
         >
-          <span>{app.translator.trans('afrux-theme-base.admin.extensions')}</span>
+          <span>{app.translator.trans('afrux-theme-base.admin.extensions.title')}</span>
           {app.current.data.extension ? <span className="ThemeBase-extensions-nav-current">{app.current.data.extension}</span> : []}
         </LinkButton>
       );
@@ -268,7 +268,7 @@ app.initializers.add('afrux-theme-base', () => {
       if (app.current.data.routeName === 'extension') {
         button.attrs.href = app.route('extensions');
         delete button.attrs.onclick;
-        button.children = app.translator.trans('afrux-theme-base.admin.extensions');
+        button.children = app.translator.trans('afrux-theme-base.admin.extensions.title');
       } else {
         button.children = app.translator.trans('afrux-theme-base.admin.header.go_back');
       }
