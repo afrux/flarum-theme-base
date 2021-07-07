@@ -1,10 +1,11 @@
 .DiscussionPage {
   &-discussion {
     > .container {
+      --container-gap: 30px;
       display: grid;
       grid-template-areas: "stream nav";
-      grid-template-columns: 1fr 150px;
-      gap: 30px;
+      grid-template-columns: calc(~"100% - 150px - var(--container-gap)") 150px;
+      gap: var(--container-gap);
     }
   }
 
