@@ -1,0 +1,32 @@
+afrux-theme-base:
+  admin:
+    extensions:
+      title: 扩展程序
+      description: 已安装的扩展程序列表
+    extension:
+      sections:
+        content: 主要设置
+        permissions: 权限
+
+    header:
+      go_back: 返回到论坛
+
+    users:
+      grid:
+        columns:
+          avatar:
+            title: 头像
+
+    settings:
+      edit_footer_links: 编辑页脚链接
+      footer_description: 页脚描述
+      footer_bottom_line: 页脚分割线文字
+      hero_banner: 欢迎横幅图片
+      hero_banner_position: "欢迎横幅图片位置样式 (例如: 'center top' 或 'center 20%')"
+      links_modal:
+        add_group: 新增链接分组
+        group_name: 第 {number} 个分组名称
+        group_title: 链接分组标题
+        add_link: 添加一个链接
+        link_url: 链接地址
+        link_label: 链接名称
