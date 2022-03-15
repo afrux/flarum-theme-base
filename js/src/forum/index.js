@@ -8,15 +8,15 @@ app.initializers.add('afrux-theme-base', () => {
     if (app.forum.attribute('afrux-theme-base.footerHooked')) m.mount(document.getElementById('footer'), Footer);
   });
 
-  extend(WelcomeHero.prototype, 'view', function (vnode) {
-    if (!app.forum.attribute('afruxHeroBanner')) return;
+  extend(WelcomeHero.prototype, 'view', function (vdom) {
+    if (!app.forum.attribute('afruxHeroBanner') || !(vdom && typeof vdom === 'object' && 'attrs' in vdom) return;
 
-    vnode.attrs.className += ' Hero--banner';
-    vnode.attrs.style = vnode.attrs.style || {};
-    vnode.attrs.style['--banner-url'] = `url("${app.forum.attribute('afruxHeroBanner')}")`;
+    vdom.attrs.className += ' Hero--banner';
+    vdom.attrs.style = vdom.attrs.style || {};
+    vdom.attrs.style['--banner-url'] = `url("${app.forum.attribute('afruxHeroBanner')}")`;
 
     if (app.forum.attribute('afruxHeroBannerPosition')) {
-      vnode.attrs.style['--banner-position'] = app.forum.attribute('afruxHeroBannerPosition');
+      vdom.attrs.style['--banner-position'] = app.forum.attribute('afruxHeroBannerPosition');
     }
   });
 });
