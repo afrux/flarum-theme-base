@@ -16,7 +16,7 @@ app.initializers.add('afrux-theme-base', () => {
     vdom.attrs.style['--banner-url'] = `url("${app.forum.attribute('afruxHeroBanner')}")`;
 
     if (app.forum.attribute('afruxHeroBannerPosition')) {
-      vdom.attrs.style['--banner-position'] = vdom.forum.attribute('afruxHeroBannerPosition');
+      vdom.attrs.style['--banner-position'] = app.forum.attribute('afruxHeroBannerPosition');
     }
   });
 });
