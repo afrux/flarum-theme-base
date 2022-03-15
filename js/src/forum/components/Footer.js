@@ -1,10 +1,10 @@
-import Component from 'flarum/common/Component';
-import Link from 'flarum/common/components/Link';
+import Component from "flarum/common/Component";
+import Link from "flarum/common/components/Link";
 
 export default class Footer extends Component {
   view() {
     if (!this.hasLinks() && !this.hasDescription() && !this.hasBottomLine()) {
-      return '';
+      return "";
     }
 
     return (
@@ -12,7 +12,9 @@ export default class Footer extends Component {
         {this.separator()}
         <div className="ThemeBaseFooter-container container">
           {this.upper()}
-          {(app.forum.attribute('afrux-theme-base.footerBottomLine') && this.lower()) || ''}
+          {(app.forum.attribute("afrux-theme-base.footerBottomLine") &&
+            this.lower()) ||
+            ""}
         </div>
       </div>
     );
@@ -23,7 +25,7 @@ export default class Footer extends Component {
   }
 
   upper() {
-    const links = (app.forum.attribute('afrux-theme-base.footerLinks') || [])
+    const links = (app.forum.attribute("afrux-theme-base.footerLinks") || [])
       .filter((item) => item !== null)
       .map((item) => {
         if (item.links) item.links = item.links.filter((item) => item !== null);
@@ -33,25 +35,41 @@ export default class Footer extends Component {
 
     return (
       <div className="ThemeBaseFooter-upper">
-        <div className={['ThemeBaseFooter-about', this.hasLinks() ? '' : 'ThemeBaseFooter-about--large'].join(' ')}>
-          <div className={['ThemeBaseFooter-logo', this.hasDescription() ? '' : 'ThemeBaseFooter-logo--large'].join(' ')}>
-            {app.forum.attribute('logoUrl') ? (
-              <img src={app.forum.attribute('logoUrl')} alt="logo" />
+        <div
+          className={[
+            "ThemeBaseFooter-about",
+            this.hasLinks() ? "" : "ThemeBaseFooter-about--large",
+          ].join(" ")}
+        >
+          <div
+            className={[
+              "ThemeBaseFooter-logo",
+              this.hasDescription() ? "" : "ThemeBaseFooter-logo--large",
+            ].join(" ")}
+          >
+            {app.forum.attribute("logoUrl") ? (
+              <img src={app.forum.attribute("logoUrl")} alt="logo" />
             ) : (
-              <h1 className="ThemeBaseFooter-title">{app.forum.attribute('title')}</h1>
+              <h1 className="ThemeBaseFooter-title">
+                {app.forum.attribute("title")}
+              </h1>
             )}
           </div>
           {this.hasDescription() ? (
-            <p className="ThemeBaseFooter-logo-description">{app.forum.attribute('afrux-theme-base.footerDescription')}</p>
+            <p className="ThemeBaseFooter-logo-description">
+              {app.forum.attribute("afrux-theme-base.footerDescription")}
+            </p>
           ) : (
-            ''
+            ""
           )}
         </div>
         {this.hasLinks() ? (
           <div className="ThemeBaseFooter-links">
             {links.map((group) => (
               <div className="ThemeBaseFooter-linkGroup">
-                <h6 className="ThemeBaseFooter-linkGroup-title">{group.title}</h6>
+                <h6 className="ThemeBaseFooter-linkGroup-title">
+                  {group.title}
+                </h6>
                 <ul>
                   {group.links.map((link) => (
                     <li className="ThemeBaseFooter-links-item">
@@ -65,7 +83,7 @@ export default class Footer extends Component {
             ))}
           </div>
         ) : (
-          ''
+          ""
         )}
       </div>
     );
@@ -74,20 +92,25 @@ export default class Footer extends Component {
   lower() {
     return (
       <div className="ThemeBaseFooter-lower">
-        <p className="ThemeBaseFooter-bottomLine">{app.forum.attribute('afrux-theme-base.footerBottomLine')}</p>
+        <p className="ThemeBaseFooter-bottomLine">
+          {app.forum.attribute("afrux-theme-base.footerBottomLine")}
+        </p>
       </div>
     );
   }
 
   hasLinks() {
-    return app.forum.attribute('afrux-theme-base.footerLinks') && app.forum.attribute('afrux-theme-base.footerLinks').length;
+    return (
+      app.forum.attribute("afrux-theme-base.footerLinks") &&
+      app.forum.attribute("afrux-theme-base.footerLinks").length
+    );
   }
 
   hasDescription() {
-    return Boolean(app.forum.attribute('afrux-theme-base.footerDescription'));
+    return Boolean(app.forum.attribute("afrux-theme-base.footerDescription"));
   }
 
   hasBottomLine() {
-    return Boolean(app.forum.attribute('afrux-theme-base.footerBottomLine'));
+    return Boolean(app.forum.attribute("afrux-theme-base.footerBottomLine"));
   }
 }

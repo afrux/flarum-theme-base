@@ -1,5 +1,5 @@
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
 
 export default {
-  'extensions/afrux-theme-base/forum/components/Footer': Footer,
+  "extensions/afrux-theme-base/forum/components/Footer": Footer,
 };

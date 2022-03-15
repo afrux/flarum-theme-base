@@ -1,28 +1,35 @@
-import FlarumExtensionPage from 'flarum/admin/components/ExtensionPage';
-import listItems from 'flarum/common/helpers/listItems';
-import Switch from 'flarum/common/components/Switch';
-import icon from 'flarum/common/helpers/icon';
-import Button from 'flarum/common/components/Button';
+import FlarumExtensionPage from "flarum/admin/components/ExtensionPage";
+import listItems from "flarum/common/helpers/listItems";
+import Switch from "flarum/common/components/Switch";
+import icon from "flarum/common/helpers/icon";
+import Button from "flarum/common/components/Button";
 
 export default class ExtensionPage extends FlarumExtensionPage {
   oninit() {
-    app.current.data.extension = this.extension.extra['flarum-extension'].title;
+    app.current.data.extension = this.extension.extra["flarum-extension"].title;
   }
 
   header() {
     const topItems = this.topItems();
 
-    topItems.get('version').attrs.className += ' TagLabel';
+    topItems.get("version").attrs.className += " TagLabel";
 
     return (
       <div className="ExtensionPage-header ThemeBase-AdminHeader">
         <div className="ThemeBase-AdminHeader-container">
-          <span className="ThemeBase-AdminHeader-icon" style={this.extension.icon}>
-            {this.extension.icon ? icon(this.extension.icon.name) : ''}
+          <span
+            className="ThemeBase-AdminHeader-icon"
+            style={this.extension.icon}
+          >
+            {this.extension.icon ? icon(this.extension.icon.name) : ""}
           </span>
           <div className="ThemeBase-AdminHeader-info">
-            <h2 className="ThemeBase-AdminHeader-title">{this.extension.extra['flarum-extension'].title}</h2>
-            <div className="ThemeBase-AdminHeader-description helpText">{this.extension.description}</div>
+            <h2 className="ThemeBase-AdminHeader-title">
+              {this.extension.extra["flarum-extension"].title}
+            </h2>
+            <div className="ThemeBase-AdminHeader-description helpText">
+              {this.extension.description}
+            </div>
           </div>
           <div className="ExtensionPage-headerTopItems">
             <ul>{listItems(topItems.toArray())}</ul>
@@ -37,22 +44,28 @@ export default class ExtensionPage extends FlarumExtensionPage {
 
     const sections = this.sections();
     const infoItems = this.infoItems();
-    this.activeSection = this.activeSection || 'content';
+    this.activeSection = this.activeSection || "content";
 
-    if (sections.items['permissions']) {
-      sections.items['permissions'].content[0] = sections.items['permissions'].content[0].children[1].children;
+    if (sections.items["permissions"]) {
+      sections.items["permissions"].content[0] =
+        sections.items["permissions"].content[0].children[1].children;
     }
 
     return (
-      <div className={'ExtensionPage ThemeBase-ExtensionPage ' + this.className()}>
+      <div
+        className={"ExtensionPage ThemeBase-ExtensionPage " + this.className()}
+      >
         {this.header()}
         <div className="ExtensionPage-body ThemeBase-ExtensionPage-body">
           <div className="container">
             <div className="ExtensionPage-headerItems ThemeBase-ExtensionPage-headerItems">
-              <Switch state={this.isEnabled()} onchange={this.toggle.bind(this, this.extension.id)}>
+              <Switch
+                state={this.isEnabled()}
+                onchange={this.toggle.bind(this, this.extension.id)}
+              >
                 {this.isEnabled(this.extension.id)
-                  ? app.translator.trans('core.admin.extension.enabled')
-                  : app.translator.trans('core.admin.extension.disabled')}
+                  ? app.translator.trans("core.admin.extension.enabled")
+                  : app.translator.trans("core.admin.extension.disabled")}
               </Switch>
               <aside className="ThemeBase-ExtensionPage-ExtensionInfo">
                 <ul>{listItems(infoItems.toArray())}</ul>
@@ -65,12 +78,14 @@ export default class ExtensionPage extends FlarumExtensionPage {
                 return (
                   <Button
                     className={[
-                      'Button ExtensionPage-sections-nav-item ThemeBase-ExtensionPage-sections-nav-item',
-                      this.activeSection === section ? 'Button--active' : '',
+                      "Button ExtensionPage-sections-nav-item ThemeBase-ExtensionPage-sections-nav-item",
+                      this.activeSection === section ? "Button--active" : "",
                     ]}
                     onclick={() => (this.activeSection = section)}
                   >
-                    {app.translator.trans(sectionNameKey) === sectionNameKey ? section : app.translator.trans(sectionNameKey)}
+                    {app.translator.trans(sectionNameKey) === sectionNameKey
+                      ? section
+                      : app.translator.trans(sectionNameKey)}
                   </Button>
                 );
               })}
@@ -80,15 +95,20 @@ export default class ExtensionPage extends FlarumExtensionPage {
                 const content = sections.items[sectionKey].content;
 
                 if (content.attrs && content.attrs.className) {
-                  content.attrs.className = content.attrs.className.replace('ExtensionPage', 'ThemeBase-ExtensionPage');
+                  content.attrs.className = content.attrs.className.replace(
+                    "ExtensionPage",
+                    "ThemeBase-ExtensionPage"
+                  );
                 }
 
                 return (
                   <div
                     className={[
-                      'ExtensionPage-section ThemeBase-ExtensionPage-section',
-                      this.activeSection === sectionKey ? 'ExtensionPage-section--active ThemeBase-ExtensionPage-section--active' : '',
-                    ].join(' ')}
+                      "ExtensionPage-section ThemeBase-ExtensionPage-section",
+                      this.activeSection === sectionKey
+                        ? "ExtensionPage-section--active ThemeBase-ExtensionPage-section--active"
+                        : "",
+                    ].join(" ")}
                   >
                     {sections.items[sectionKey].content}
                   </div>
@@ -103,7 +123,11 @@ export default class ExtensionPage extends FlarumExtensionPage {
 
   content(original) {
     if (!this.isEnabled()) {
-      return <div className="ThemeBase-infobox">{app.translator.trans('core.admin.extension.enable_to_see')}</div>;
+      return (
+        <div className="ThemeBase-infobox">
+          {app.translator.trans("core.admin.extension.enable_to_see")}
+        </div>
+      );
     }
 
     return original();

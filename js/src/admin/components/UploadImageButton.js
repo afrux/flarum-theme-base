@@ -1,11 +1,11 @@
-import Button from 'flarum/common/components/Button';
+import Button from "flarum/common/components/Button";
 
 export default class UploadImageButton extends Button {
   loading = false;
 
   view(vnode) {
     this.attrs.loading = this.loading;
-    this.attrs.className = (this.attrs.className || '') + ' Button';
+    this.attrs.className = (this.attrs.className || "") + " Button";
 
     if (app.data.settings[this.attrs.setting]) {
       this.attrs.onclick = this.remove.bind(this);
@@ -13,16 +13,28 @@ export default class UploadImageButton extends Button {
       return (
         <div className="UploadImageButton-container">
           <div className="UploadImageButton-image-container">
-            <img className="UploadImageButton-image" src={app.forum.attribute(this.attrs.serializedName)} alt="" />
+            <img
+              className="UploadImageButton-image"
+              src={app.forum.attribute(this.attrs.serializedName)}
+              alt=""
+            />
           </div>
-          {super.view({ ...vnode, children: app.translator.trans('core.admin.upload_image.remove_button') })}
+          {super.view({
+            ...vnode,
+            children: app.translator.trans(
+              "core.admin.upload_image.remove_button"
+            ),
+          })}
         </div>
       );
     } else {
       this.attrs.onclick = this.upload.bind(this);
     }
 
-    return super.view({ ...vnode, children: app.translator.trans('core.admin.upload_image.upload_button') });
+    return super.view({
+      ...vnode,
+      children: app.translator.trans("core.admin.upload_image.upload_button"),
+    });
   }
 
   /**
@@ -34,10 +46,10 @@ export default class UploadImageButton extends Button {
     const $input = $('<input type="file">');
 
     $input
-      .appendTo('body')
+      .appendTo("body")
       .hide()
       .click()
-      .on('change', (e) => {
+      .on("change", (e) => {
         const body = new FormData();
         body.append(this.attrs.name, $(e.target)[0].files[0]);
 
@@ -46,7 +58,7 @@ export default class UploadImageButton extends Button {
 
         app
           .request({
-            method: 'POST',
+            method: "POST",
             url: this.resourceUrl(),
             serialize: (raw) => raw,
             body,
@@ -64,14 +76,14 @@ export default class UploadImageButton extends Button {
 
     app
       .request({
-        method: 'DELETE',
+        method: "DELETE",
         url: this.resourceUrl(),
       })
       .then(this.success.bind(this), this.failure.bind(this));
   }
 
   resourceUrl() {
-    return app.forum.attribute('apiUrl') + '/' + this.attrs.routeName;
+    return app.forum.attribute("apiUrl") + "/" + this.attrs.routeName;
   }
 
   /**

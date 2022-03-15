@@ -1,14 +1,14 @@
-import Modal from 'flarum/common/components/Modal';
-import Button from 'flarum/common/components/Button';
-import Stream from 'flarum/common/utils/Stream';
-import extractText from 'flarum/common/utils/extractText';
-import saveSettings from 'flarum/admin/utils/saveSettings';
+import Modal from "flarum/common/components/Modal";
+import Button from "flarum/common/components/Button";
+import Stream from "flarum/common/utils/Stream";
+import extractText from "flarum/common/utils/extractText";
+import saveSettings from "flarum/admin/utils/saveSettings";
 
 export default class EditFooterLinksModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
 
-    const footerLinks = app.data.settings['afrux-theme-base.footer_links'];
+    const footerLinks = app.data.settings["afrux-theme-base.footer_links"];
     const links = ((footerLinks && JSON.parse(footerLinks)) || [])
       .filter((item) => item !== null)
       .map((item) => {
@@ -22,11 +22,13 @@ export default class EditFooterLinksModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('afrux-theme-base.admin.settings.edit_footer_links');
+    return app.translator.trans(
+      "afrux-theme-base.admin.settings.edit_footer_links"
+    );
   }
 
   className() {
-    return 'EditFooterLinksModal Modal--medium';
+    return "EditFooterLinksModal Modal--medium";
   }
 
   content() {
@@ -39,7 +41,10 @@ export default class EditFooterLinksModal extends Modal {
                 className="EditFooterLinksModal-groups-item-title-text"
                 contenteditable="true"
                 oninput={(e) => {
-                  this.saveGroup({ ...group, title: e.target.innerHTML }, groupIndex);
+                  this.saveGroup(
+                    { ...group, title: e.target.innerHTML },
+                    groupIndex
+                  );
                 }}
               >
                 {m.trust(group.title)}
@@ -55,15 +60,19 @@ export default class EditFooterLinksModal extends Modal {
               </div>
             </div>
             <div className="EditFooterLinksModal-links">
-              {group.links.map((link, index) => this.link(link, index, groupIndex))}
+              {group.links.map((link, index) =>
+                this.link(link, index, groupIndex)
+              )}
               <Button
                 className="Button"
                 icon="fas fa-plus"
                 onclick={() => {
-                  this.saveLink({ url: '', label: '' }, groupIndex);
+                  this.saveLink({ url: "", label: "" }, groupIndex);
                 }}
               >
-                {app.translator.trans('afrux-theme-base.admin.settings.links_modal.add_link')}
+                {app.translator.trans(
+                  "afrux-theme-base.admin.settings.links_modal.add_link"
+                )}
               </Button>
             </div>
           </div>
@@ -74,7 +83,7 @@ export default class EditFooterLinksModal extends Modal {
             loading={this.loading()}
             onclick={() => {
               saveSettings({
-                'afrux-theme-base.footer_links': JSON.stringify(this.links()),
+                "afrux-theme-base.footer_links": JSON.stringify(this.links()),
               }).then(() => {
                 this.loading(false);
                 app.modal.close();
@@ -83,7 +92,7 @@ export default class EditFooterLinksModal extends Modal {
               this.loading(true);
             }}
           >
-            {app.translator.trans('core.lib.edit_user.submit_button')}
+            {app.translator.trans("core.lib.edit_user.submit_button")}
           </Button>
           <Button
             className="Button"
@@ -91,13 +100,18 @@ export default class EditFooterLinksModal extends Modal {
             onclick={() => {
               this.saveGroup({
                 title: extractText(
-                  app.translator.trans('afrux-theme-base.admin.settings.links_modal.group_name', { number: this.links().length + 1 })
+                  app.translator.trans(
+                    "afrux-theme-base.admin.settings.links_modal.group_name",
+                    { number: this.links().length + 1 }
+                  )
                 ),
                 links: [],
               });
             }}
           >
-            {app.translator.trans('afrux-theme-base.admin.settings.links_modal.add_group')}
+            {app.translator.trans(
+              "afrux-theme-base.admin.settings.links_modal.add_group"
+            )}
           </Button>
         </div>
       </div>
@@ -115,8 +129,12 @@ export default class EditFooterLinksModal extends Modal {
           }}
           value={label}
           className="FormControl EditFooterLinksModal-links-item-label"
-          placeholder={app.translator.trans('afrux-theme-base.admin.settings.links_modal.link_label')}
-          aria-labeledby={app.translator.trans('afrux-theme-base.admin.settings.links_modal.link_label')}
+          placeholder={app.translator.trans(
+            "afrux-theme-base.admin.settings.links_modal.link_label"
+          )}
+          aria-labeledby={app.translator.trans(
+            "afrux-theme-base.admin.settings.links_modal.link_label"
+          )}
         />
         <input
           oninput={(e) => {
@@ -124,8 +142,12 @@ export default class EditFooterLinksModal extends Modal {
           }}
           value={url}
           className="FormControl EditFooterLinksModal-links-item-url"
-          placeholder={app.translator.trans('afrux-theme-base.admin.settings.links_modal.link_url')}
-          aria-labeledby={app.translator.trans('afrux-theme-base.admin.settings.links_modal.link_url')}
+          placeholder={app.translator.trans(
+            "afrux-theme-base.admin.settings.links_modal.link_url"
+          )}
+          aria-labeledby={app.translator.trans(
+            "afrux-theme-base.admin.settings.links_modal.link_url"
+          )}
         />
         <Button
           className="Button Button--icon"
@@ -145,7 +167,9 @@ export default class EditFooterLinksModal extends Modal {
     else if (index !== null) links[groupIndex].links[index] = link;
     else links[groupIndex].links.push(link);
 
-    links[groupIndex].links = links[groupIndex].links.filter((item) => item !== null);
+    links[groupIndex].links = links[groupIndex].links.filter(
+      (item) => item !== null
+    );
 
     this.links(links);
   }
