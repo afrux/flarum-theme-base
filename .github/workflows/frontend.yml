@@ -8,14 +8,14 @@ on: [workflow_dispatch, push, pull_request]
 
 jobs:
   run:
-    uses: flarum/.github/.github/workflows/REUSABLE_frontend.yml@main
+    uses: flarum/.framework/.github/workflows/REUSABLE_frontend.yml@main
     with:
-      enable_bundlewatch: true
+      enable_bundlewatch: false
       enable_prettier: true
       enable_typescript: false
 
       frontend_directory: js
-      backend_directory: src
+      backend_directory: ./
       js_package_manager: yarn
       main_git_branch: master
     secrets:

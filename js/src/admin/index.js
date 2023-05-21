@@ -136,6 +136,9 @@ app.initializers.add("afrux-theme-base", () => {
         "version-flarum": "fas fa-comment",
         "version-php": "fab fa-php",
         "version-mysql": "fas fa-database",
+        "schedule-status": "fas fa-clock",
+        "queue-driver": "fas fa-tasks",
+        "session-driver": "fas fa-id-card-alt",
       };
 
       if (app.data.illuminateVersion) {
@@ -270,8 +273,6 @@ app.initializers.add("afrux-theme-base", () => {
             const displayName = username(user);
             const username_ = user.username();
 
-            console.log(displayName, username_);
-
             if (username_ === displayName.text) {
               return username_;
             }
@@ -305,8 +306,8 @@ app.initializers.add("afrux-theme-base", () => {
       this.$(".UserList-emailIconBtn").removeClass("Button--text");
     });
 
-    extend(UserListPage.prototype, "content", function (vnode) {
-      vnode[0] = (
+    extend(UserListPage.prototype, "headerItems", function (items) {
+      items.replace('totalUsers', (
         <div className="UserListPage-stat-container">
           <div class="UserListPage-totalUsers UserListPage-stat">
             <div className="UserListPage-stat-value">{this.userCount}</div>
@@ -317,7 +318,7 @@ app.initializers.add("afrux-theme-base", () => {
             </div>
           </div>
         </div>
-      );
+      ));
     });
   }
 

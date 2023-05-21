@@ -1,6 +1,6 @@
 import AdminPage from "flarum/admin/components/AdminPage";
 import getCategorizedExtensions from "flarum/admin/utils/getCategorizedExtensions";
-import ExtensionsWidget from "flarum/admin/components/ExtensionsWidget";
+import classList from "flarum/common/utils/classList";
 import icon from "flarum/common/helpers/icon";
 import isExtensionEnabled from "flarum/admin/utils/isExtensionEnabled";
 import Link from "flarum/common/components/Link";
@@ -37,7 +37,8 @@ export default class ExtensionsPage extends AdminPage {
                 {this.extensions[category].map((extension) => (
                   <Link
                     href={app.route("extension", { id: extension.id })}
-                    className="ThemeBase-Extension"
+                    className={classList('ThemeBase-Extension', {'ThemeBase-Extension--colored': !!extension.icon.backgroundColor})}
+                    style={extension.icon.backgroundColor ? {'--color': extension.icon.backgroundColor} : {}}
                   >
                     <div className="ThemeBase-Extension-icon">
                       <span

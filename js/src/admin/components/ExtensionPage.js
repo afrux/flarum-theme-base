@@ -47,8 +47,8 @@ export default class ExtensionPage extends FlarumExtensionPage {
     this.activeSection = this.activeSection || "content";
 
     if (sections.items["permissions"]) {
-      sections.items["permissions"].content[0] =
-        sections.items["permissions"].content[0].children[1].children;
+      sections.items["permissions"].content =
+        (sections.items["permissions"].content?.children && sections.items["permissions"].content?.children[1]?.children) || sections.items["permissions"].content;
     }
 
     return (
